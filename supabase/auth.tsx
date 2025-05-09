@@ -12,6 +12,7 @@ type AuthContextType = {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
+// Export as a named function component for consistent exports
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
@@ -53,6 +54,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       password,
     });
     if (error) throw error;
+
+    // Redirect to dashboard after successful login
+    window.location.href = "/dashboard";
   };
 
   const signOut = async () => {
@@ -67,6 +71,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   );
 }
 
+// Export as a named function for consistent exports
 export function useAuth() {
   const context = useContext(AuthContext);
   if (context === undefined) {

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { PlusCircle } from "lucide-react";
-import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { motion } from "framer-motion";
 
 interface Task {
@@ -26,8 +25,8 @@ interface TaskBoardProps {
 const defaultTasks: Task[] = [
   {
     id: "1",
-    title: "Design System Updates",
-    description: "Update component library with new design tokens",
+    title: "Review Claim CL2024000042",
+    description: "Review new claim from Acme Corp for damaged goods",
     status: "todo",
     assignee: {
       name: "Alice Smith",
@@ -36,8 +35,8 @@ const defaultTasks: Task[] = [
   },
   {
     id: "2",
-    title: "API Integration",
-    description: "Integrate new backend endpoints",
+    title: "Request Additional Information",
+    description: "Contact XYZ Industries for supporting documents",
     status: "in-progress",
     assignee: {
       name: "Bob Johnson",
@@ -46,12 +45,22 @@ const defaultTasks: Task[] = [
   },
   {
     id: "3",
-    title: "User Testing",
-    description: "Conduct user testing sessions",
+    title: "Approve Claim Payment",
+    description: "Process payment for approved claim CL2024000035",
     status: "done",
     assignee: {
       name: "Carol Williams",
       avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Carol",
+    },
+  },
+  {
+    id: "4",
+    title: "Update Claim Status",
+    description: "Update status for claim CL2024000039 to Accepted",
+    status: "todo",
+    assignee: {
+      name: "David Brown",
+      avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=David",
     },
   },
 ];
@@ -63,7 +72,7 @@ const TaskBoard = ({
   isLoading = false,
 }: TaskBoardProps) => {
   const [loading, setLoading] = useState(isLoading);
-  
+
   // Simulate loading for demo purposes
   useEffect(() => {
     if (isLoading) {
@@ -74,9 +83,24 @@ const TaskBoard = ({
     }
   }, [isLoading]);
   const columns = [
-    { id: "todo", title: "To Do", color: "bg-gray-50", borderColor: "border-gray-200" },
-    { id: "in-progress", title: "In Progress", color: "bg-blue-50", borderColor: "border-blue-100" },
-    { id: "done", title: "Done", color: "bg-green-50", borderColor: "border-green-100" },
+    {
+      id: "todo",
+      title: "To Do",
+      color: "bg-gray-50",
+      borderColor: "border-gray-200",
+    },
+    {
+      id: "in-progress",
+      title: "In Progress",
+      color: "bg-blue-50",
+      borderColor: "border-blue-100",
+    },
+    {
+      id: "done",
+      title: "Done",
+      color: "bg-green-50",
+      borderColor: "border-green-100",
+    },
   ];
 
   const handleDragStart = (e: React.DragEvent, taskId: string) => {
@@ -103,7 +127,7 @@ const TaskBoard = ({
             Add Task
           </Button>
         </div>
-        
+
         <div className="grid grid-cols-3 gap-6 h-[calc(100%-4rem)]">
           {columns.map((column) => (
             <div
@@ -111,7 +135,9 @@ const TaskBoard = ({
               className={`${column.color} rounded-xl p-4 border ${column.borderColor}`}
             >
               <h3 className="font-medium text-gray-900 mb-4 flex items-center">
-                <span className={`h-2 w-2 rounded-full mr-2 ${column.id === 'todo' ? 'bg-gray-400' : column.id === 'in-progress' ? 'bg-blue-400' : 'bg-green-400'}`}></span>
+                <span
+                  className={`h-2 w-2 rounded-full mr-2 ${column.id === "todo" ? "bg-gray-400" : column.id === "in-progress" ? "bg-blue-400" : "bg-green-400"}`}
+                ></span>
                 {column.title}
               </h3>
               <div className="space-y-3 flex flex-col items-center justify-center min-h-[200px]">
@@ -121,7 +147,9 @@ const TaskBoard = ({
                     <div className="h-3 w-3 rounded-full bg-blue-500/20 animate-pulse" />
                   </div>
                 </div>
-                <p className="text-sm font-medium text-gray-500 mt-3">Loading tasks...</p>
+                <p className="text-sm font-medium text-gray-500 mt-3">
+                  Loading tasks...
+                </p>
               </div>
             </div>
           ))}
@@ -129,7 +157,7 @@ const TaskBoard = ({
       </div>
     );
   }
-  
+
   return (
     <div className="w-full h-full bg-white/90 backdrop-blur-sm p-6 rounded-2xl shadow-sm border border-gray-100">
       <div className="flex justify-between items-center mb-6">
@@ -149,7 +177,9 @@ const TaskBoard = ({
             onDrop={(e) => handleDrop(e, column.id as Task["status"])}
           >
             <h3 className="font-medium text-gray-900 mb-4 flex items-center">
-              <span className={`h-2 w-2 rounded-full mr-2 ${column.id === 'todo' ? 'bg-gray-400' : column.id === 'in-progress' ? 'bg-blue-400' : 'bg-green-400'}`}></span>
+              <span
+                className={`h-2 w-2 rounded-full mr-2 ${column.id === "todo" ? "bg-gray-400" : column.id === "in-progress" ? "bg-blue-400" : "bg-green-400"}`}
+              ></span>
               {column.title}
             </h3>
             <div className="space-y-3">

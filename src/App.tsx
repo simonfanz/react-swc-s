@@ -4,6 +4,7 @@ import routes from "tempo-routes";
 import LoginForm from "./components/auth/LoginForm";
 import SignUpForm from "./components/auth/SignUpForm";
 import Dashboard from "./components/pages/dashboard";
+import Settings from "./components/pages/settings";
 import Success from "./components/pages/success";
 import Home from "./components/pages/home";
 import { AuthProvider, useAuth } from "../supabase/auth";
@@ -39,10 +40,93 @@ function AppRoutes() {
             </PrivateRoute>
           }
         />
+        <Route path="/success" element={<Success />} />
         <Route
-          path="/success"
+          path="/settings"
           element={
-            <Success />
+            <PrivateRoute>
+              <Settings />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/settings/users"
+          element={
+            <PrivateRoute>
+              <Settings />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/settings/customers"
+          element={
+            <PrivateRoute>
+              <Settings />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/settings/cost-centres"
+          element={
+            <PrivateRoute>
+              <Settings />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/settings/claim-types"
+          element={
+            <PrivateRoute>
+              <Settings />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/settings/damage-types"
+          element={
+            <PrivateRoute>
+              <Settings />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/settings/gst-rates"
+          element={
+            <PrivateRoute>
+              <Settings />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/settings/approvals"
+          element={
+            <PrivateRoute>
+              <Settings />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/settings/withdrawal-reasons"
+          element={
+            <PrivateRoute>
+              <Settings />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/settings/declined-reasons"
+          element={
+            <PrivateRoute>
+              <Settings />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/settings/system"
+          element={
+            <PrivateRoute>
+              <Settings />
+            </PrivateRoute>
           }
         />
       </Routes>
